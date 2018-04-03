@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.example.safwat.twitterapp.Presenter.LoginPresenter;
+import com.example.safwat.twitterapp.PresenterInterface.LoginPresenterInterface;
+import com.example.safwat.twitterapp.View.LoginViewInterface;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 

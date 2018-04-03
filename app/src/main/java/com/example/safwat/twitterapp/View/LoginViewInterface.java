@@ -1,4 +1,4 @@
-package com.example.safwat.twitterapp;
+package com.example.safwat.twitterapp.View;
 
 import com.twitter.sdk.android.core.TwitterException;
 

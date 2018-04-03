@@ -1,13 +1,14 @@
-package com.example.safwat.twitterapp;
+package com.example.safwat.twitterapp.Presenter;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.telecom.Call;
-import android.widget.Toast;
 
+import com.example.safwat.twitterapp.Followers;
+import com.example.safwat.twitterapp.Login;
+import com.example.safwat.twitterapp.PresenterInterface.LoginPresenterInterface;
+import com.example.safwat.twitterapp.View.LoginViewInterface;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -18,13 +19,13 @@ import com.twitter.sdk.android.core.Callback;
  * Created by Safwat on 4/2/2018.
  */
 
-public class LoginPresenter extends Callback<TwitterSession> implements LoginPresenterInterface{
+public class LoginPresenter extends Callback<TwitterSession> implements LoginPresenterInterface {
 
     private Context context;
     private Activity activity;
     private LoginViewInterface loginview;
 
-    LoginPresenter(Login view){
+    public LoginPresenter(Login view){
         this.context = view;
         loginview = view;
         this.activity = view;
