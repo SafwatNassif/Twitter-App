@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#10b3ff</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#fff</color>
+    <color name="handle_color">#8b8b8b</color>
     <color name="card_view">#ffffff</color>
 
 </resources>

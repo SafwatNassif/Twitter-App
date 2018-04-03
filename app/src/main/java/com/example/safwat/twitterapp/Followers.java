@@ -39,7 +39,6 @@ public class Followers extends AppCompatActivity implements FollowersViewInterfa
         followerPresenterInterface = new FollowerPresenter(this);
         followerPresenterInterface.getUser();
         followerPresenterInterface.getFollowers();
-
     }
 
     @Override

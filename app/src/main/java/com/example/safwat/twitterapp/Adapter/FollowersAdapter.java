@@ -1,17 +1,22 @@
 package com.example.safwat.twitterapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.safwat.twitterapp.Details;
 import com.example.safwat.twitterapp.Model.TwitterFollower;
 import com.example.safwat.twitterapp.R;
 import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.models.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.internal.Utils;
@@ -39,14 +44,29 @@ public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.hold
     }
 
     @Override
-    public void onBindViewHolder(holder holder, int position) {
+    public void onBindViewHolder(holder holder, final int position) {
         Picasso.with(context).load(arrayList.get(position).getProfilePictureUrl()).into(holder.profile);
-        holder.handle.setText(arrayList.get(position).getScreenName());
+        holder.handle.setText("@"+arrayList.get(position).getScreenName());
         holder.name.setText(arrayList.get(position).getName());
+
         if(arrayList.get(position).getDescription()!="")
             holder.bio.setText(arrayList.get(position).getDescription());
         else
             holder.bio.setVisibility(View.GONE);
+
+        holder.item_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, Details.class);
+                i.putExtra("profile_url",arrayList.get(position).getProfilePictureUrl());
+                i.putExtra("Cover_url",arrayList.get(position).getProfileBannerUrl());
+                i.putExtra("user_name",arrayList.get(position).getName());
+                i.putExtra("id",arrayList.get(position).getId());
+                i.putExtra("screen_name",arrayList.get(position).getScreenName());
+                context.startActivity(i);
+
+            }
+        });
     }
 
     @Override
@@ -55,11 +75,12 @@ public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.hold
     }
 
     public class holder extends RecyclerView.ViewHolder{
-
+        CardView item_container;
         CircleImageView profile;
         TextView name,handle,bio;
         public holder(View itemView) {
             super(itemView);
+            item_container=(CardView) itemView.findViewById(R.id.item_container);
             profile=(CircleImageView) itemView.findViewById(R.id.follower_profile);
             name=(TextView) itemView.findViewById(R.id.follower_name);
             handle=(TextView) itemView.findViewById(R.id.follower_handle);

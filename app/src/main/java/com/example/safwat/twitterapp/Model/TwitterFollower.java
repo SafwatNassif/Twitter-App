@@ -21,6 +21,22 @@ public class TwitterFollower{
     @Expose
     private String profilePictureUrl;
 
+    @SerializedName("profile_banner_url")
+    @Expose
+    private String profileBannerUrl;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getProfileBannerUrl() {
+        return profileBannerUrl;
+    }
+
+    public void setProfileBannerUrl(String profileBannerUrl) {
+        this.profileBannerUrl = profileBannerUrl;
+    }
+
     @SerializedName("screen_name")
     @Expose
     private String screenName;
