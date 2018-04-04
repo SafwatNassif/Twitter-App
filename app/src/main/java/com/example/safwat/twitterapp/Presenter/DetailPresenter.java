@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.safwat.twitterapp.Details;
+import com.example.safwat.twitterapp.Activity.Details;
 import com.example.safwat.twitterapp.PresenterInterface.DetailPresenterInterface;
 import com.example.safwat.twitterapp.View.DetailViewInterface;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;

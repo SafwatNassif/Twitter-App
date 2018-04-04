@@ -34,8 +34,8 @@ public class FetchFollowers implements Callback<TwitterFollowerResponse>{
 
     @Override
     public void onResponse(Call<TwitterFollowerResponse> call, Response<TwitterFollowerResponse> response) {
-        TwitterFollowerResponse twitterResponse = response.body();
-        follower = twitterResponse.getResults();
+         TwitterFollowerResponse twitterResponse = response.body();
+         follower = twitterResponse.getResults();
         if (follower != null){
             Log.e(LOG_CAT,"first name is : "+follower.get(0).getName());
             Log.e(LOG_CAT,"\nbio is :"+follower.get(0).getDescription());
@@ -48,7 +48,6 @@ public class FetchFollowers implements Callback<TwitterFollowerResponse>{
 
     @Override
     public void onFailure(Call<TwitterFollowerResponse> call, Throwable t) {
-        Toast.makeText(context,"erorrrrrrrrrrrrrre",Toast.LENGTH_LONG).show();
         Log.e(LOG_CAT,"error in fetch followers : "+t.toString());
 
     }

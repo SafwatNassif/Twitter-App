@@ -2,7 +2,6 @@ package com.example.safwat.twitterapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,16 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.safwat.twitterapp.Details;
+import com.example.safwat.twitterapp.Activity.Details;
 import com.example.safwat.twitterapp.Model.TwitterFollower;
 import com.example.safwat.twitterapp.R;
 import com.squareup.picasso.Picasso;
-import com.twitter.sdk.android.core.models.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-import butterknife.internal.Utils;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**

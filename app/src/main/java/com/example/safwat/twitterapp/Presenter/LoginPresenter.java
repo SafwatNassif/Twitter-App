@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.safwat.twitterapp.Followers;
-import com.example.safwat.twitterapp.Login;
+import com.example.safwat.twitterapp.Activity.Followers;
+import com.example.safwat.twitterapp.Activity.Login;
 import com.example.safwat.twitterapp.PresenterInterface.LoginPresenterInterface;
 import com.example.safwat.twitterapp.View.LoginViewInterface;
 import com.twitter.sdk.android.core.Result;

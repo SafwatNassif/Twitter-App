@@ -1,4 +1,4 @@
-package com.example.safwat.twitterapp;
+package com.example.safwat.twitterapp.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.safwat.twitterapp.Presenter.LoginPresenter;
 import com.example.safwat.twitterapp.PresenterInterface.LoginPresenterInterface;
+import com.example.safwat.twitterapp.R;
 import com.example.safwat.twitterapp.View.LoginViewInterface;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
@@ -54,6 +55,7 @@ public class Login extends AppCompatActivity implements LoginViewInterface {
     @Override
     public void UserFirstTimeLogin() {
         loginButton.setEnabled(true);
+        //need test if first time and there is no connection.
         loginButton.setCallback((LoginPresenter)loginPresenterInterface);
     }
 

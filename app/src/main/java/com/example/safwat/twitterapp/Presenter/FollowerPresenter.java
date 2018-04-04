@@ -1,9 +1,10 @@
 package com.example.safwat.twitterapp.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.safwat.twitterapp.FetchFollowers;
-import com.example.safwat.twitterapp.Followers;
+import com.example.safwat.twitterapp.Activity.Followers;
 import com.example.safwat.twitterapp.Model.TwitterFollower;
 import com.example.safwat.twitterapp.Model.TwitterFollowerResponse;
 import com.example.safwat.twitterapp.PresenterInterface.FollowerPresenterInterface;
@@ -14,6 +15,7 @@ import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
+import com.twitter.sdk.android.core.services.ListService;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ import retrofit2.Response;
  */
 
 public class FollowerPresenter implements FollowerPresenterInterface, Callback<User> {
+    private static final String LOG_CAT = FollowerPresenter.class.getSimpleName();
     private Context context;
     private FollowersViewInterface viewInterface;
     private TwitterApiClient twitterApiClient;
@@ -43,7 +46,6 @@ public class FollowerPresenter implements FollowerPresenterInterface, Callback<U
                 false, true);
         userCall.enqueue(this);
     }
-
     @Override
     public void getFollowers(){
         TwitterSession twitterSession = TwitterCore.getInstance().getSessionManager().getActiveSession();
@@ -75,6 +77,6 @@ public class FollowerPresenter implements FollowerPresenterInterface, Callback<U
 
     @Override
     public void onFailure(Call<User> call, Throwable t) {
-
+        Log.e(LOG_CAT,"error while get your user data of toolbar");
     }
 }
