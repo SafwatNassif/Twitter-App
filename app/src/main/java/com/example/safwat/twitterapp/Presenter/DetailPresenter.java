@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.safwat.twitterapp.Activity.Details;
 import com.example.safwat.twitterapp.PresenterInterface.DetailPresenterInterface;
+import com.example.safwat.twitterapp.Service.CustomApiClient;
 import com.example.safwat.twitterapp.View.DetailViewInterface;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -49,12 +50,15 @@ public class DetailPresenter extends Callback<List<Tweet>> implements DetailPres
     }
 
 
-    public void getTweets() {
-        TwitterApiClient apiClient = TwitterCore.getInstance().getApiClient();
+    public void getTweets(){
+        TwitterApiClient apiClient = new CustomApiClient(TwitterCore.getInstance()
+                .getSessionManager().getActiveSession(),context);
+//      TwitterApiClient apiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = apiClient.getStatusesService();
-        Call<List<Tweet>> call =statusesService
+        Call<List<Tweet>> call = statusesService
                 .userTimeline(id,i.getStringExtra("screen_name"),
-                        10,null,null,null,null,null,null);
+                        10,null,null,null,null,
+                        null,null);
         call.enqueue(this);
     }
 

@@ -40,8 +40,9 @@ public class FollowerPresenter implements FollowerPresenterInterface, Callback<U
     }
 
     @Override
-    public void getUser() {
-        twitterApiClient = TwitterCore.getInstance().getApiClient();
+    public  void getUser() {
+        twitterApiClient = new CustomApiClient(TwitterCore.getInstance().getSessionManager().getActiveSession(),context);
+//        twitterApiClient = TwitterCore.getInstance().getApiClient();
         Call<User> userCall = twitterApiClient.getAccountService().verifyCredentials(true,
                 false, true);
         userCall.enqueue(this);
@@ -54,7 +55,7 @@ public class FollowerPresenter implements FollowerPresenterInterface, Callback<U
         Long id = twitterSession.getUserId();
 
         fetchFollowers = new FetchFollowers(context,this);
-        CustomApiClient customApiClient = new CustomApiClient(twitterSession);
+        CustomApiClient customApiClient = new CustomApiClient(twitterSession,context);
         Call<TwitterFollowerResponse> followerList = customApiClient.getApiService().followerList(id);
         followerList.enqueue(fetchFollowers);
     }
