@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.safwat.twitterapp.Presenter.LoginPresenter;
 import com.example.safwat.twitterapp.PresenterInterface.LoginPresenterInterface;
@@ -48,6 +49,7 @@ public class Login extends AppCompatActivity implements LoginViewInterface {
     @Override
     public void onFailureLogin(TwitterException exception) {
         Log.e(LOG_CAT,"there is exception in request :\n"+exception.getMessage());
+        Toast.makeText(this, "Please check your network connection", Toast.LENGTH_SHORT).show();
     }
 
     // in this case user open the app for first time or he sign out so login screen will be show if

@@ -3,11 +3,13 @@ package com.example.safwat.twitterapp.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Safwat on 4/2/2018.
  */
 
-public class TwitterFollower{
+public class TwitterFollower implements Serializable {
 
     @SerializedName("id")
     @Expose

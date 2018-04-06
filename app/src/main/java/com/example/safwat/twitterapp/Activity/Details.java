@@ -1,73 +1,47 @@
 package com.example.safwat.twitterapp.Activity;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.example.safwat.twitterapp.Adapter.TweetAdapter;
-import com.example.safwat.twitterapp.Presenter.DetailPresenter;
-import com.example.safwat.twitterapp.PresenterInterface.DetailPresenterInterface;
+import com.example.safwat.twitterapp.Fragment.DetailsFragment;
 import com.example.safwat.twitterapp.R;
-import com.example.safwat.twitterapp.View.DetailViewInterface;
 import com.squareup.picasso.Picasso;
-import com.twitter.sdk.android.core.models.Tweet;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Details extends AppCompatActivity implements DetailViewInterface, SwipeRefreshLayout.OnRefreshListener {
+public class Details extends AppCompatActivity {
 
-    private ImageView cover;
-    private CircleImageView profilePicture;
-    private TextView name;
-    private DetailPresenterInterface presenter;
-    private RecyclerView tweet_list;
-    private SwipeRefreshLayout refreshLayout;
-    private static final String LOG_CAT = Details.class.getSimpleName();
+    private ImageView banner;
+    private CircleImageView profile;
+    private SharedPreferences sharedPreferences;
+    private String profileUrl,bannerUrl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_details);
-        cover=(ImageView) findViewById(R.id.cover);
-        profilePicture=(CircleImageView) findViewById(R.id.profile);
-        name =(TextView) findViewById(R.id.UserName);
-        tweet_list =(RecyclerView) findViewById(R.id.tweets_list);
-        refreshLayout =(SwipeRefreshLayout) findViewById(R.id.details_refresh);
+        define();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.details_refresh_fragment,new DetailsFragment()).commit();
+    }
 
-        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
-        refreshLayout.setOnRefreshListener(this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        tweet_list.setLayoutManager(mLayoutManager);
-
-        presenter = new DetailPresenter(this);
-        presenter.getFollowerData();
-
+    private void define() {
+        banner =(ImageView) findViewById(R.id.account_banner);
+        profile=(CircleImageView) findViewById(R.id.account_profile);
+        sharedPreferences= getSharedPreferences("user",MODE_PRIVATE);
+        profileUrl = sharedPreferences.getString("profile","");
+        bannerUrl=sharedPreferences.getString("banner","");
+        Picasso.with(this).load(profileUrl).into(profile);
+        Picasso.with(this).load(bannerUrl).into(banner);
     }
 
     @Override
-    public void getDataFromBundle(List<Tweet> data) {
-        Picasso.with(this).load(data.get(0).user.profileBannerUrl).into(cover);
-        Picasso.with(this).load(data.get(0).user.profileImageUrl).into(profilePicture);
-        name.setText(data.get(0).user.name);
-        TweetAdapter adapter = new TweetAdapter(this,new ArrayList<Tweet>(data),R.layout.tweet_item);
-        tweet_list.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        refreshLayout.setRefreshing(false);
-
-    }
-
-    @Override
-    public void onRefresh() {
-        refreshLayout.setRefreshing(true);
-        presenter.getFollowerData();
-
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }

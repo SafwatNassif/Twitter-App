@@ -7,58 +7,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.safwat.twitterapp.Activity.Followers">
 
-    <android.support.v7.widget.ActionBarContainer
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/action_bar"
-        >
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <include layout="@layout/tool_bar"
+        android:id="@+id/tool_bar_follower"/>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_Menu"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/profile_avatar"
-                app:civ_border_color="@color/white"
-                app:civ_border_overlay="true"
-                app:civ_border_width="1dp" />
-
-            <TextView
-                android:id="@+id/user_name_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@+id/profile_Menu"
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.ActionBarContainer>
-
-    <android.support.v4.widget.SwipeRefreshLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/action_bar"
-        android:id="@+id/refresh_follower"
-        >
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/follower_list"
+        android:layout_below="@id/tool_bar_follower"
+        android:id="@+id/activity_follower_container"
         />
-    </android.support.v4.widget.SwipeRefreshLayout>
-
 </RelativeLayout>

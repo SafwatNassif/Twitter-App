@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.safwat.twitterapp.Activity.Details;
-import com.example.safwat.twitterapp.PresenterInterface.DetailPresenterInterface;
+import com.example.safwat.twitterapp.Fragment.DetailsFragment;
+import com.example.safwat.twitterapp.PresenterInterface.DetailPresenterFragmentInterface;
 import com.example.safwat.twitterapp.Service.CustomApiClient;
 import com.example.safwat.twitterapp.View.DetailViewInterface;
 import com.twitter.sdk.android.core.Callback;
@@ -26,18 +26,18 @@ import retrofit2.Call;
  * Created by Safwat on 4/3/2018.
  */
 
-public class DetailPresenter extends Callback<List<Tweet>> implements DetailPresenterInterface {
+public class DetailPresenterFragment extends Callback<List<Tweet>> implements DetailPresenterFragmentInterface {
     private Context context;
     private DetailViewInterface detailViewInterface;
     private Activity details;
     private Long id;
-    private final static String LOG_CAT =DetailPresenter.class.getSimpleName();
+    private final static String LOG_CAT =DetailPresenterFragment.class.getSimpleName();
     private Intent i;
 
-    public DetailPresenter(Details details) {
-        this.context = details;
+    public DetailPresenterFragment(DetailsFragment details) {
+        this.context = details.getContext();
         detailViewInterface = details;
-        this.details =  details;
+        this.details =  details.getActivity();
     }
 
     @Override

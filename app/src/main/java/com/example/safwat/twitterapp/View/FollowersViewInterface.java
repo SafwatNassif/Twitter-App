@@ -1,6 +1,7 @@
 package com.example.safwat.twitterapp.View;
 
 import com.example.safwat.twitterapp.Model.TwitterFollower;
+import com.twitter.sdk.android.core.models.User;
 
 import java.util.List;
 
@@ -9,7 +10,6 @@ import java.util.List;
  */
 
 public interface FollowersViewInterface {
-    void SetImageAndName(String name,String url);
     void OnFetchFollowers(List<TwitterFollower> followers);
     void onEmptyFollowers();
 }

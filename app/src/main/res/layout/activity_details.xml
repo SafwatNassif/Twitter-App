@@ -1,73 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/details_refresh"
+    android:id="@+id/drawer_view"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.safwat.twitterapp.Activity.Details">
-    <LinearLayout
+
+
+    <!--<android.support.design.widget.CoordinatorLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--&gt;-->
+        <!--<android.support.design.widget.AppBarLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/app_bar_layout"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--&gt;-->
+            <!--<android.support.design.widget.CollapsingToolbarLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+                <!--app:contentScrim="@color/colorPrimary"-->
+                <!--app:expandedTitleMarginStart="48dp"-->
+                <!--app:expandedTitleMarginEnd="64dp"-->
+                <!--android:fitsSystemWindows="true"-->
+                <!--android:id="@+id/collapsing_toolbar"-->
+                <!--&gt;-->
+                <!--<android.support.v7.widget.Toolbar-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="?attr/actionBarSize"-->
+                    <!--android:id="@+id/tool_bar_details"-->
+                    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+                    <!--app:layout_collapseMode="pin"-->
+                    <!--/>-->
+
+            <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+        <!--</android.support.design.widget.AppBarLayout>-->
+    <!--</android.support.design.widget.CoordinatorLayout>-->
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/details_refresh_fragment"
+            />
+
+    <android.support.design.widget.NavigationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="3"
+        android:id="@+id/navigationMenu"
+        android:layout_gravity="start"
         >
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/containerImage"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:background="@color/white"
-            >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:weightSum="3"
+           android:orientation="vertical"
+           >
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1"
+               >
+               <include
+                   android:id="@+id/header_nav_swipe"
+                   layout="@layout/nav_header"/>
+           </LinearLayout>
+           <fragment
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="2"
+               android:id="@+id/follower_fragment_container"
+               android:name="com.example.safwat.twitterapp.Fragment.FollowerFragment"
+               />
 
-            <ImageView
-                android:id="@+id/cover"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="80dp"
-                android:background="@color/colorPrimary"
-                android:scaleType="centerCrop" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/profile_avatar"
-                app:civ_border_color="@color/white"
-                app:civ_border_overlay="true"
-                app:civ_border_width="3dp"
-                android:layout_marginBottom="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-            <TextView
-                android:id="@+id/UserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
-                android:textColor="@color/handle_color"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </android.support.constraint.ConstraintLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:layout_below="@+id/containerImage"
-            >
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tweets_list"
-                android:layout_marginTop="8dp"
-                />
-        </RelativeLayout>
-    </LinearLayout>
-</android.support.v4.widget.SwipeRefreshLayout>
+       </LinearLayout>
+    </android.support.design.widget.NavigationView>
+ </android.support.v4.widget.DrawerLayout>

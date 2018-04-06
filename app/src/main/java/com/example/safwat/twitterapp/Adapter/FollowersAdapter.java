@@ -2,6 +2,7 @@ package com.example.safwat.twitterapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.safwat.twitterapp.Activity.Details;
-import com.example.safwat.twitterapp.Model.TwitterFollower;
+ import com.example.safwat.twitterapp.Model.TwitterFollower;
 import com.example.safwat.twitterapp.R;
 import com.squareup.picasso.Picasso;
+ import com.twitter.sdk.android.core.models.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -27,11 +30,13 @@ public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.hold
 
     private Context context;
     private int layout;
-    private ArrayList<TwitterFollower> arrayList;
-    public FollowersAdapter(Context context,int Resource,ArrayList<TwitterFollower> list){
+    private User user;
+     private ArrayList<TwitterFollower> arrayList;
+    public FollowersAdapter(Context context,int Resource,ArrayList<TwitterFollower> list,User user){
         this.context=context;
         this.layout=Resource;
         this.arrayList=list;
+        this.user =user;
     }
     @Override
     public holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,11 +59,9 @@ public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.hold
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, Details.class);
-                i.putExtra("profile_url",arrayList.get(position).getProfilePictureUrl());
-                i.putExtra("Cover_url",arrayList.get(position).getProfileBannerUrl());
-                i.putExtra("user_name",arrayList.get(position).getName());
-                i.putExtra("id",arrayList.get(position).getId());
                 i.putExtra("screen_name",arrayList.get(position).getScreenName());
+                i.putExtra("id",arrayList.get(position).getId());
+                i.putExtra("banner",arrayList.get(position).getProfileBannerUrl());
                 context.startActivity(i);
 
             }

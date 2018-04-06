@@ -2,4 +2,10 @@
     <string name="app_name">Twitter App</string>
     <string name="com.twitter.sdk.android.CONSUMER_KEY">FlwD3F8xhiydD7zQHFaQkG5mo</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">Nv8fzhySRSwsQd9a8sDDUSuZVJF7pfdPTyX1wKGo6UgC7x1uC1</string>
+
+    <!-- TODO: Remove or change tprofile_avatarlder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+
 </resources>
