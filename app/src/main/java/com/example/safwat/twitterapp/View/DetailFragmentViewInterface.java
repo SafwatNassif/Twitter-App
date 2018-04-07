@@ -8,6 +8,7 @@ import java.util.List;
  * Created by Safwat on 4/3/2018.
  */
 
-public interface DetailViewInterface {
-    void getDataFromBundle(List<Tweet> data);
+public interface DetailFragmentViewInterface {
+    void getTweetList(List<Tweet> data);
+    void EmptyTweet();
 }

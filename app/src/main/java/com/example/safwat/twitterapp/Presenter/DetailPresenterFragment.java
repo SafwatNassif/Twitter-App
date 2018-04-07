@@ -8,7 +8,7 @@ import android.util.Log;
 import com.example.safwat.twitterapp.Fragment.DetailsFragment;
 import com.example.safwat.twitterapp.PresenterInterface.DetailPresenterFragmentInterface;
 import com.example.safwat.twitterapp.Service.CustomApiClient;
-import com.example.safwat.twitterapp.View.DetailViewInterface;
+import com.example.safwat.twitterapp.View.DetailFragmentViewInterface;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterApiClient;
@@ -28,7 +28,7 @@ import retrofit2.Call;
 
 public class DetailPresenterFragment extends Callback<List<Tweet>> implements DetailPresenterFragmentInterface {
     private Context context;
-    private DetailViewInterface detailViewInterface;
+    private DetailFragmentViewInterface detailFragmentViewInterface;
     private Activity details;
     private Long id;
     private final static String LOG_CAT =DetailPresenterFragment.class.getSimpleName();
@@ -36,10 +36,11 @@ public class DetailPresenterFragment extends Callback<List<Tweet>> implements De
 
     public DetailPresenterFragment(DetailsFragment details) {
         this.context = details.getContext();
-        detailViewInterface = details;
+        detailFragmentViewInterface = details;
         this.details =  details.getActivity();
     }
 
+    // to get tweet of specific user we need to know the id , that i pass it from follower Screen
     @Override
     public void getFollowerData() {
         i = details.getIntent();
@@ -53,7 +54,6 @@ public class DetailPresenterFragment extends Callback<List<Tweet>> implements De
     public void getTweets(){
         TwitterApiClient apiClient = new CustomApiClient(TwitterCore.getInstance()
                 .getSessionManager().getActiveSession(),context);
-//      TwitterApiClient apiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = apiClient.getStatusesService();
         Call<List<Tweet>> call = statusesService
                 .userTimeline(id,i.getStringExtra("screen_name"),
@@ -63,16 +63,19 @@ public class DetailPresenterFragment extends Callback<List<Tweet>> implements De
     }
 
 
-
     @Override
     public void success(Result<List<Tweet>> result) {
-        Log.e(LOG_CAT,"tweet message is : \n"+result.data.get(0).text+
-                "tweeting screenName : "+result.data.get(0).user.screenName);
-        detailViewInterface.getDataFromBundle(result.data);
+        if (result.data.size() > 0) {
+            Log.e(LOG_CAT, "tweet message is : \n" + result.data.get(0).text +
+                    "tweeting screenName : " + result.data.get(0).user.screenName);
+            detailFragmentViewInterface.getTweetList(result.data);
+        }else{
+            detailFragmentViewInterface.EmptyTweet();
+        }
     }
-
     @Override
     public void failure(TwitterException exception) {
         Log.e(LOG_CAT,"tweet error failure : \n"+exception.getMessage());
     }
+
 }

@@ -30,14 +30,15 @@ public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.hold
 
     private Context context;
     private int layout;
-    private User user;
-     private ArrayList<TwitterFollower> arrayList;
-    public FollowersAdapter(Context context,int Resource,ArrayList<TwitterFollower> list,User user){
+    private ArrayList<TwitterFollower> arrayList;
+
+    public FollowersAdapter(Context context,int Resource,ArrayList<TwitterFollower> list){
         this.context=context;
         this.layout=Resource;
         this.arrayList=list;
-        this.user =user;
     }
+
+
     @Override
     public holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(layout,parent,false);

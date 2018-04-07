@@ -30,7 +30,6 @@ import java.util.List;
 public class FollowerFragment extends Fragment implements
         FollowersViewInterface, SwipeRefreshLayout.OnRefreshListener, Runnable {
 
-    private User user;
     private FollowerPresenterFragmentInterface followerPresenterFragmentInterface;
     private RecyclerView recyclerView;
     private FollowersAdapter adapter;
@@ -46,13 +45,13 @@ public class FollowerFragment extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View RootView = inflater.inflate(R.layout.fragment_follower, container, false);
-        Bundle bundle= getArguments();
         recyclerView =(RecyclerView) RootView.findViewById(R.id.follower_list);
         refreshLayout =(SwipeRefreshLayout) RootView.findViewById(R.id.refresh_follower);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setVisibility(View.GONE);
+
         refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
         refreshLayout.setOnRefreshListener(this);
 
@@ -61,23 +60,27 @@ public class FollowerFragment extends Fragment implements
         return RootView;
     }
 
-
+    // after fetch follower we need to show them in list
+    // so, i create adapter and pass data to it
     @Override
     public void OnFetchFollowers(List<TwitterFollower> followers) {
         ArrayList<TwitterFollower> arrayList = new ArrayList<>(followers);
-        adapter = new FollowersAdapter(getContext(),R.layout.follower_item,arrayList,user);
+        adapter = new FollowersAdapter(getContext(),R.layout.follower_item,arrayList);
         refreshLayout.setRefreshing(false);
         recyclerView.setAdapter(adapter);
+        // we need notify adapter to change in case there is any data change
         adapter.notifyDataSetChanged();
         recyclerView.setVisibility(View.VISIBLE);
     }
 
+    // in case there is no follower
     @Override
     public void onEmptyFollowers() {
-        Toast.makeText(getContext(), "There is no Followers", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(getContext(), getContext().getResources().getString(R.string.no_follower)
+                , Toast.LENGTH_SHORT).show();
     }
 
+    // refresh method using to update twitter follower data if any change happen
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);

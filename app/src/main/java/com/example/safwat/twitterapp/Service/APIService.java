@@ -11,6 +11,7 @@ import retrofit2.http.Query;
  */
 
 public interface APIService {
+    // service that using to get list of follower's
     @GET("/1.1/followers/list.json")
     Call<TwitterFollowerResponse> followerList(@Query("user_id") Long id);
 

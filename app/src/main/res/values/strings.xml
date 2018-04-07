@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Twitter App</string>
-    <string name="com.twitter.sdk.android.CONSUMER_KEY">FlwD3F8xhiydD7zQHFaQkG5mo</string>
-    <string name="com.twitter.sdk.android.CONSUMER_SECRET">Nv8fzhySRSwsQd9a8sDDUSuZVJF7pfdPTyX1wKGo6UgC7x1uC1</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY" translatable="false">FlwD3F8xhiydD7zQHFaQkG5mo</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET" translatable="false">Nv8fzhySRSwsQd9a8sDDUSuZVJF7pfdPTyX1wKGo6UgC7x1uC1</string>
 
-    <!-- TODO: Remove or change tprofile_avatarlder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="open">open</string>
-    <string name="close">close</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="open" translatable="false">open</string>
+    <string name="close" translatable="false">close</string>
+    <string name="setting">Setting</string>
+    <string name="choose_lang">Choose Language</string>
+    <string name="no_follower">Empty Follower</string>
+    <string name="no_Tweet">Empty Tweet</string>
 
 </resources>

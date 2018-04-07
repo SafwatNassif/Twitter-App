@@ -13,12 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.safwat.twitterapp.Adapter.TweetAdapter;
 import com.example.safwat.twitterapp.Presenter.DetailPresenterFragment;
 import com.example.safwat.twitterapp.PresenterInterface.DetailPresenterFragmentInterface;
 import com.example.safwat.twitterapp.R;
-import com.example.safwat.twitterapp.View.DetailViewInterface;
+import com.example.safwat.twitterapp.View.DetailFragmentViewInterface;
 import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.models.Tweet;
 
@@ -27,7 +28,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DetailsFragment extends Fragment implements DetailViewInterface, SwipeRefreshLayout.OnRefreshListener{
+public class DetailsFragment extends Fragment implements DetailFragmentViewInterface, SwipeRefreshLayout.OnRefreshListener{
     private ImageView cover;
     private CircleImageView profilePicture;
     private TextView name;
@@ -64,8 +65,9 @@ public class DetailsFragment extends Fragment implements DetailViewInterface, Sw
     }
 
 
+    // called after getTweetList fetched and this method set data to adapter
     @Override
-    public void getDataFromBundle(List<Tweet> data) {
+    public void getTweetList(List<Tweet> data) {
         Picasso.with(getContext()).load(data.get(0).user.profileBannerUrl).into(cover);
         Picasso.with(getContext()).load(data.get(0).user.profileImageUrl).into(profilePicture);
         name.setText(data.get(0).user.name);
@@ -76,6 +78,12 @@ public class DetailsFragment extends Fragment implements DetailViewInterface, Sw
         Details_container.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void EmptyTweet() {
+        Toast.makeText(getContext(), getContext().getResources().getString(R.string.no_Tweet), Toast.LENGTH_SHORT).show();
+    }
+
+    // refresh screen to load new tweet if there is new tweet
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);

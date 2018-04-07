@@ -21,13 +21,11 @@ import com.twitter.sdk.android.core.Callback;
 
 public class LoginPresenter extends Callback<TwitterSession> implements LoginPresenterInterface {
 
-    private Context context;
-    private Activity activity;
+     private Activity activity;
     private LoginViewInterface loginview;
 
     public LoginPresenter(Login view){
-        this.context = view;
-        loginview = view;
+         loginview = view;
         this.activity = view;
     }
 
@@ -41,6 +39,8 @@ public class LoginPresenter extends Callback<TwitterSession> implements LoginPre
         loginview.onFailureLogin(exception);
     }
 
+    // check user OAuth  if he login before then swap him to follower activity
+    // else then show the twitter button to Authentication.
     @Override
     public void checkUserLogin() {
         if(TwitterCore.getInstance().getSessionManager().getActiveSession() != null)
@@ -49,6 +49,7 @@ public class LoginPresenter extends Callback<TwitterSession> implements LoginPre
             loginview.UserFirstTimeLogin();
     }
 
+    // swap to follower activity and destroy this activity.
     @Override
     public void NextActivity() {
         Intent i = new Intent(activity,Followers.class);

@@ -1,8 +1,10 @@
 package com.example.safwat.twitterapp.Application;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
+import com.example.safwat.twitterapp.Utility;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -13,6 +15,8 @@ import com.twitter.sdk.android.core.TwitterConfig;
  */
 
 public class TwitterApplication extends Application {
+
+
     @Override
     public void onCreate() {
         super.onCreate();

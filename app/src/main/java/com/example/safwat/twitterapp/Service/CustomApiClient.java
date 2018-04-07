@@ -28,14 +28,13 @@ public class CustomApiClient extends TwitterApiClient  {
 
     private final static String LOG_CAT=CustomApiClient.class.getSimpleName();
 
-    public CustomApiClient(TwitterSession session) {
-        super(session);
-    }
-
+    // custom api client to get follower's and cache the api to work offline
     public CustomApiClient(TwitterSession session,Context context) {
         super(session ,provideOkHttpClient(context));
     }
 
+    // to cache data  offline we need to pass client to TwitterApiClient
+    // so i create okHttpClient that also help to cache api using interceptor callback
     private static OkHttpClient provideOkHttpClient(Context context) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor()
@@ -49,6 +48,7 @@ public class CustomApiClient extends TwitterApiClient  {
 
     }
 
+    // create cache file that will store api data
     private static Cache provideCache(Context context) {
         Cache cache = null;
         try {
@@ -76,6 +76,7 @@ public class CustomApiClient extends TwitterApiClient  {
         };
     }
 
+    // in case offline and we need api data it provided from cache-file
     private static Interceptor provideOfflineCacheInterceptor(final Context context) {
         return new Interceptor() {
             @Override
@@ -96,6 +97,7 @@ public class CustomApiClient extends TwitterApiClient  {
         };
     }
 
+    // return ApiService that will used to get follower data
     public APIService getApiService(){
         return getService(APIService.class);
     }

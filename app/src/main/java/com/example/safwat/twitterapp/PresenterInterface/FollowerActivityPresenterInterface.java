@@ -6,4 +6,5 @@ package com.example.safwat.twitterapp.PresenterInterface;
 
 public interface FollowerActivityPresenterInterface  {
     void getUser();
+    void setLang();
 }

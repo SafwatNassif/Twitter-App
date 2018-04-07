@@ -8,4 +8,5 @@ import com.twitter.sdk.android.core.models.User;
 
 public interface FollowerActivityViewInterface {
     void SetImageAndName(User user);
+    void ReCreate();
 }
